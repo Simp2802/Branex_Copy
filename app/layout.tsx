@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
-import { AuthProvider } from "@/contexts/AuthContext"; // ✅ added
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Navigation } from "@/components/navigation";
+import { AuthModal } from "@/components/auth-modal";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Branex - Find Your Perfect Marketing Agency",
+  description: "Match with marketing agencies that think like you. Discover agencies aligned with your goals, budget, and thinking style.",
   generator: "v0.app",
 };
 
@@ -21,8 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        {/* ✅ AuthProvider wraps the entire app */}
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <Navigation />
+          <AuthModal />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
